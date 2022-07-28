@@ -35,12 +35,16 @@ public class AppTest {
 
     @BeforeEach
     public void startAppAndOpenBrowser() throws IOException {
+       
+        // System.setProperty("webdriver.gecko.driver","/usr/local/bin/geckodriver");
+
         // Disable browser logs from being logged to stdout
         System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE,"/dev/null");
         // Create a threadpool with 1 thread and run our server on it.
         serverExecutor = Executors.newFixedThreadPool(1);
         server = App.startServer(serverExecutor);
         FirefoxOptions options = new FirefoxOptions();
+        // options.setBinary("/usr/local/bin/geckodriver");
         options.setHeadless(true);
         driver = new FirefoxDriver(options);
         percy = new Percy(driver);
